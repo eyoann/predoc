@@ -1,0 +1,31 @@
+AppBundle\Entity\Question:
+    type: entity
+    table: question
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        text:
+            type: string
+            length: 500
+    manyToOne:
+        questionRoot:
+            targetEntity: AppBundle\Entity\Question
+            joinColumn: question_root
+            referencedColumnName: id
+        questionnaire:
+            targetEntity: AppBundle\Entity\Questionnaire
+            joinColumn:
+                name: questionnaire_id
+                referencedColumnName: id
+    manyToMany:
+        keywords:
+            targetEntity: Keyword
+            mappedBy: questions
+    oneToMany:
+        responses:
+            targetEntity: AppBundle\Entity\Response
+            mappedBy: previousQuestion

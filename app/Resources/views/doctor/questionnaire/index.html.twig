@@ -1,0 +1,67 @@
+{% extends 'doctor/app.html.twig' %}
+
+{% block body %}
+    <br>
+    <br>
+    <br>
+    <ul class="list-unstyled">
+        <li>
+            <a href="{{ path('new_doctor_questionnaire') }}"> + Créer un questionnaire</a>
+        </li>
+    </ul>
+    {% if questionnaires|length > 0 %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-condensed table-hover table-striped tablesorter">
+                <thead>
+                <tr>
+                    <th>Identifiant</th>
+                    <th data-sorter="false">Questionnaire</th>
+                    <th>Public</th>
+                    <th>Dernière modification</th>
+                    <td>Action</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for questionnaire in questionnaires %}
+                    <tr>
+                        <td>{% if questionnaire.id in childrens|keys %} <button onclick="display(this)" type="button"><i class='ion-arrow-right-b'></i></button> {% endif %}{{ questionnaire.id }}</td>
+
+                        <td>{{ questionnaire.title }}</td>
+                        <td>{% if questionnaire.public %}Oui {% else %} Non {% endif %} </td>
+                        <td>{{ questionnaire.updated|date }}</td>
+                        <td><a class="btn btn-primary btn-xs" href="{{ path('statistique', {id : questionnaire.id}) }}"><i class='ion-arrow-graph-up-right'></i>  Statistique </a> <a class="btn btn-primary btn-xs" href="{{ path('edit_doctor_questionnaire', {id : questionnaire.id}) }}"><i class='ion-gear-a'></i>  Modifier </a></td>
+                    </tr>
+                    {% if questionnaire.id in childrens|keys %}
+                        {% for questionnaire in childrens[questionnaire.id] %}
+                            <tr class="child">
+                                <td>{{ questionnaire.id }}</td>
+                                <td>{{ questionnaire.title }}</td>
+                                <td>{% if questionnaire.public %}Oui {% else %} Non {% endif %} </td>
+                                <td>{{ questionnaire.updated|date }}</td>
+                                <td><a class="btn btn-primary btn-xs" href="{{ path('statistique', {id : questionnaire.id}) }}"><i class='ion-arrow-graph-up-right'></i> Statistique </a> <a class="btn btn-primary btn-xs" href="{{ path('edit_doctor_questionnaire', {id : questionnaire.id}) }}"><i class='ion-gear-a'></i>  Modifier </a></td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock body %}
+{% block javascripts %}
+<script>
+    $(document).ready(function(){
+        $(".child").slideToggle("slow");
+});
+    function display(e) {
+        console.log($(e).find('i'));
+        if ($(e).find('i').hasClass('ion-arrow-right-b')) {
+            $(e).find('i').attr('class', 'ion-arrow-down-b');
+        } else {
+            $(e).find('i').attr('class', 'ion-arrow-right-b');
+        }
+        $(e).parent().parent().next().slideToggle("slow");
+    }
+</script>
+
+{% endblock %}

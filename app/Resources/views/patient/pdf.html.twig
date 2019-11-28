@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PréDoc | Recapitulatif</title> 
+</head>
+<body>
+	<div class="header"> 
+		<h1 style="text-align: center;">Recapitulatif</h1>
+	</div>
+	<div class="body">  
+			<h2>Information personnelle</h2>
+
+			<ul class="dl-horizontal"> 
+				<li>
+					<b>Nom et prénom :</b>  {{ user.get('nom') }} {{ user.get('prenom') }}
+				</li> 
+				<li>
+					<b>Date de naissance :</b> {{ user.get('birthday') }} 
+				</li> 
+				<li>
+					<b>Sexe : </b> 
+					{% if app.session.get('user').get('gender') is sameas("H") %} Homme {% else %} Femme {% endif %}
+				</li> 
+			</ul> 
+
+			{% for questionnaire in questionnaires %} 
+				<h2>{{questionnaire.title}}</h2> 
+					<ol>
+					{% for response in responses %}
+					{% if response.previousQuestion.questionnaire == questionnaire %} 
+					  <li>
+					  	<b>{{response.previousQuestion.text}} : </b>
+						<i>{{response.text}}</i>
+					  </li>
+			   		{% endif %}
+				{% endfor %}
+					</ol>  
+			{% endfor %} 
+	</div> 
+</body>
+</html> 

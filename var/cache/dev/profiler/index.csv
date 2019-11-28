@@ -1,0 +1,13 @@
+0179a6,127.0.0.1,GET,http://127.0.0.1:8000/,1574967058,23438d,200
+23438d,127.0.0.1,GET,http://127.0.0.1:8000/,1574967058,,404
+f8ea0a,127.0.0.1,GET,http://127.0.0.1:8000/,1574967335,892551,200
+892551,127.0.0.1,GET,http://127.0.0.1:8000/,1574967335,,404
+9e839b,127.0.0.1,GET,http://127.0.0.1:8000/,1574967342,7c7af7,200
+7c7af7,127.0.0.1,GET,http://127.0.0.1:8000/,1574967342,,404
+90db05,127.0.0.1,GET,http://predoc.localhost:8000/,1574967373,,200
+f7ec16,127.0.0.1,GET,http://predoc.localhost:8000/connecter,1574967382,,200
+e05535,127.0.0.1,POST,http://predoc.localhost:8000/connecter,1574967412,,302
+3845d2,127.0.0.1,GET,http://predoc.localhost:8000/questionnaire,1574967413,,301
+a0b032,127.0.0.1,GET,http://predoc.localhost:8000/questionnaire/,1574967413,8fe7e5,200
+8fe7e5,127.0.0.1,GET,http://predoc.localhost:8000/questionnaire/,1574967413,,500
+b2f4b0,127.0.0.1,GET,http://predoc.localhost:8000/,1574967479,,200

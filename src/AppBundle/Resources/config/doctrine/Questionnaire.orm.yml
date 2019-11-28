@@ -1,0 +1,63 @@
+AppBundle\Entity\Questionnaire:
+    type: entity
+    repositoryClass: AppBundle\Repository\QuestionnaireRepository
+    table: questionnaire
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: 50
+        hidden:
+            type: boolean
+            options:
+                default: false
+        public:
+            type: boolean
+            options:
+                default: false
+        lvl:
+            type: integer
+            gedmo:
+                - treeLevel
+        created:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+    manyToOne:
+        parent:
+            targetEntity: AppBundle\Entity\Questionnaire
+            joinColumn:
+                referencedColumnName: id
+                onDelete: CASCADE
+            gedmo:
+                - treeParent
+    oneToOne:
+        question:
+            targetEntity: AppBundle\Entity\Question
+            joinColumn:
+                name: question_id
+                referencedColumnName: id
+    manyToMany:
+        contacts:
+            targetEntity: Contact
+            inversedBy: questionnaires
+            joinTable:
+                name: contacts_questionnaires
+            joinColumns:
+                contact_id:
+                    referencedColumnName: id
+            inverseJoinColumns:
+                questionnaire_id:
+                referencedColumnName: id
+

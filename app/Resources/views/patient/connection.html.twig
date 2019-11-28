@@ -1,0 +1,61 @@
+{% extends 'layouts/app.html.twig' %}
+
+{% block body %}
+	<div class="container">
+    	<div class="col-md-8 col-md-offset-2 padding50">
+    	{% for flashMessage in app.session.flashbag.get('error') %}
+		<div class="alert alert-dismissible alert-danger">
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		  S'il vous plaît prenez un moment pour remplir notre formulaire ci-dessous . <br>S'il vous plaît noter que votre information privée est importante pour nous et vos informations ne seront pas transmises à des tiers.
+		</div> 
+		{% endfor %}
+    	<h1><sapn class="ion ion-ios-pulse-strong"></span> &nbsp; <span class="text-t1">Bienvenue</span></h1><hr>
+    	<form class="form-horizontal" method="post" action="">
+		    <div class="form-group">
+		      <label for="nom" class="col-xs-4 control-label">Nom et prénom</label>
+		      <div class="col-xs-4"> 
+		         <input type="text" class="form-control" id="nom" placeholder="Nom" name="nom" > 
+		      </div>
+		      <div class="col-xs-4">  
+		          <input type="text" class="form-control" id="prenom" placeholder="Prénom" name="prenom"> 
+		      </div>
+		    </div> 
+		    <div class="form-group">
+		      <label for="email" class="col-xs-4 control-label">E-mail</label>
+		      <div class="col-xs-8">
+		        <input type="text" class="form-control" id="email" placeholder="E-mail" name="email"> 
+		      </div> 
+		    </div>    
+		    <div class="form-group">
+		      <label for="birthday" class="col-xs-4 control-label">Date de naissance</label>
+		      <div class="col-xs-8">
+		        <input type="date" class="form-control" id="birthday" name="birthday"> 
+		      </div> 
+		    </div>   
+		     <div class="form-group">
+			      <label class="col-xs-4 control-label">Sexe</label>
+			      <div class="col-xs-8">
+			        <div class="radio">
+			          <label>
+			            <input type="radio" name="gender" id="geneder" value="H" checked>
+			            Homme
+			          </label>
+			        </div>
+			        <div class="radio">
+			          <label>
+			            <input type="radio" name="gender" id="geneder" value="F">
+			            Femme
+			          </label>
+			        </div>
+			      </div>
+			    </div>
+		    <div class="form-group">
+		      <div class="col-xs-4 col-lg-offset-8"> 
+		        <button type="submit" class="btn btn-primary btn-block">Suivant   &nbsp; <i class="ion ion-android-arrow-forward"></i></button>
+		      </div>
+		    </div> 
+		</form>
+
+ 		</div>
+	</div>
+{% endblock %}

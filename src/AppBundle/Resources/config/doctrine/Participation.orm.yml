@@ -1,0 +1,24 @@
+AppBundle\Entity\Participation:
+    type: entity
+    table: participation
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        date:
+            type: datetime
+    manyToMany:
+        responses:
+            targetEntity: Response
+            inversedBy: participations
+            joinTable:
+                name: response_participation
+            joinColumns:
+                response_id:
+                    referencedColumnName: id
+            inverseJoinColumns:
+                participation_id:
+                referencedColumnName: id

@@ -1,0 +1,12 @@
+AppBundle\Entity\User:
+    type:  entity
+    table: fos_user
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    oneToOne:
+        contact:
+            targetEntity: Contact
+            mappedBy: user

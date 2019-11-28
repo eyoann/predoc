@@ -1,0 +1,46 @@
+{% extends 'administrator/tempalte.html.twig' %}
+
+{% block contenu %}
+
+{% if questionnaires|length > 0 %}
+        <div class="panel panel-default">
+                        <div class="panel-heading">
+                             Liste des Questions :
+                        </div>
+           </div>
+                 <div class="panel-body">
+                    <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables">
+                <thead>
+                <tr>
+                    <th>Identifiant</th>
+                    <th>Nom questionnaire</th>
+                    <th>public</th>
+                    <th>Action</th>
+                    
+
+                </tr>
+
+                </thead>
+                <tbody>
+                {% for questionnaire in questionnaires %}
+                    <tr class="odd gradeX">
+                    <td>{{ questionnaire.id }}</td>
+                    <td>{{ questionnaire.title }}</td>
+                    <td>{% if questionnaire.public %} Oui {% else %} Non {% endif %} </td>
+
+                    
+                    <td><a class="btn btn-success btn-xs" href="{{ path('public', {id : questionnaire.id}) }}"> Publier </a></td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+                    </table>
+                    </div>
+                            
+                </div>
+           
+       
+    {% endif %}
+     {% endblock %}
+

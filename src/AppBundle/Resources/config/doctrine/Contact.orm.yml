@@ -1,0 +1,71 @@
+AppBundle\Entity\Contact:
+    type: entity
+    table: contact
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        lastname:
+            type: string
+            length: 50
+            nullable: true
+        firstname:
+            type: string
+            length: 50
+            nullable: true
+        phone:
+            type: phone_number
+            nullable: true
+        rpps:
+            type: string
+            length: 50
+            nullable: true
+        address1:
+            type: string
+            length: 35
+        address2:
+            type: string
+            length: 35
+            nullable: true
+        address3:
+            type: string
+            length: 35
+            nullable: true
+        zipcode:
+            type: string
+            length: 10
+        city:
+            type: string
+            length: 35
+        country:
+            type: string
+            length: 35
+        created:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+    oneToOne:
+        user:
+            targetEntity: User
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+            inversedBy: contact
+    manyToMany:
+        specialisations:
+            targetEntity: Specialisation
+            mappedBy: contacts
+        questionnaires:
+            targetEntity: Questionnaire
+            mappedBy: contacts
+
+

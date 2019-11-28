@@ -1,0 +1,63 @@
+{% extends 'layouts/app.html.twig' %}
+
+{% block body %} 
+
+<div id="slides">
+  <div class="topslider"> 
+      <div class="col-xs-6 col-xs-offset-2 slider-content">
+        <div class="col-xs-12">
+          <h1>Consultation en quelques clics</h1> 
+        </div>
+        <div class="col-xs-4 col-xs-offset-3"><br>
+          <a class="btn btn-primary btn-block btn-lg" href="{{ path('patient_connectpage' ) }}">Commencer</a> 
+        </div> 
+      </div> 
+    <img src="{{asset('bundles/assets/img/slider.jpg')}}">
+  </div>  
+  <div class="topslider"> 
+      <div class="col-xs-6 col-xs-offset-2 slider-content">
+        <div class="col-xs-12">
+          <h1>Consultation en quelques clics</h1> 
+        </div>
+        <div class="col-xs-4 col-xs-offset-3"><br>
+          <a class="btn btn-primary btn-block btn-lg" href="{{ path('patient_connectpage' ) }}">Commencer</a> 
+        </div> 
+      </div> 
+    <img src="{{asset('bundles/assets/img/slider1.jpg')}}">
+  </div>  
+</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+<style type="text/css">
+  #slides {display:none;}
+  #slides .slidesjs-pagination,#slides .slidesjs-navigation,#slides .slidesjs-play,#slides .slidesjs-stop{display: none!important;} 
+</style>
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script src="{{asset('bundles/app/js/jquery.slides.min.js')}}"></script>
+<script type="text/javascript">
+ $(function(){
+      $("#slides").slidesjs({ 
+        height: 450,
+        play: {
+          active: true,
+          auto: true,
+          interval: 10000,
+          swap: true,
+          pauseOnHover: true,
+          restartDelay: 2500
+        }, 
+        navigation: {
+          active: false
+        }
+      });
+    });
+</script>
+
+{% endblock %}

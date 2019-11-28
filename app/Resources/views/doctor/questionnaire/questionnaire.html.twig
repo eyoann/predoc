@@ -1,0 +1,65 @@
+{% extends 'doctor/app.html.twig' %}
+
+{% block body %}
+	<br>
+	<br>
+	<br>
+	<br>
+	<form action="{{ path('save_questionnaire') }}" method="post">
+		<div class="container">
+			{% if questionnaire is defined %}
+				<div class="panel panel-default">
+		  			<div class="panel-heading">Questionnaire parent : {{ questionnaire.title }}</div>
+				</div>
+			{% endif %}
+			<div class="panel panel-default">
+		  		<div class="panel-heading">Titre de votre questionnaire</div>
+		  		<div class="panel-body">
+		  			<input class="form-control required-focus-only" type="text" name="questionnaire">
+		  		</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="panel panel-default">
+		  		<div class="panel-heading">Votre question</div>
+		  		<div class="panel-body">
+		  			<input class="form-control required-focus-only" type="text" name="question[]">
+		  		</div>
+				<div class="panel-heading">Vos réponses</div>
+				<div class="panel-body">
+		  			<input class="form-control required-focus-only" type="text" name="response[0][]">
+		  		</div>
+		  		<div class="panel-body">
+		  			<input class="form-control required-focus-only" type="text" name="response[0][]" >
+		  		</div>
+		  		<div id="end">
+		  			<button class="btn btn-primary" onclick="addResponse(this)" type="button">Ajouter une réponse</button>
+		  		</div>
+			</div>
+		 </div>
+		 <div class="container">
+			 <button class="btn btn-primary" onclick="addQuestion(this)" type="button">Ajouter une question</button>
+			 {% if questionnaire is defined %}
+			 	<button class="btn btn-default" name="save" value="{{questionnaire.id}}">Sauvegarder</button>
+			 {% else %}
+			 	<button class="btn btn-primary" name="add" value="add">Ajouter un sous questionnaire</button>
+			 	<button class="btn btn-default" name="save">Sauvegarder</button>
+			 {% endif %}
+		 </div>
+	</form>
+{% endblock %}
+{% block javascripts %}
+	<script>
+		var index = 0;
+		function addResponse(e) {
+			$(e).parent().before(
+        	"<div class='panel-body'><input class='form-control required-focus-only' type='text' name='response["+index+"][]'> </div>");
+		}
+		function addQuestion(e) {
+			index++;
+			$(e).parent().before(
+        	"<div class='container'><div class='panel panel-default'><div class='panel-heading'>Votre question</div><div class='panel-body'><input class='form-control required-focus-only' type='text' name='question[]'></div><div class='panel-heading'>Vos réponses</div><div class='panel-body'><input class='form-control required-focus-only' type='text' name='response["+index+"][]'></div><div class='panel-body'><input class='form-control required-focus-only' type='text' name='response["+index+"][]'></div><div id='end'><button class='btn btn-primary' onclick='addResponse(this)' type='button'>Ajouter une réponse</button></div></div></div>");
+		}
+	</script>
+
+{% endblock %}

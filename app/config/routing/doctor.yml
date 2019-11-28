@@ -1,0 +1,15 @@
+_patient_annotation:
+    resource: "@AppBundle/Controller/Doctor"
+    type: annotation
+
+doctor_homepage:
+    path: /
+    defaults: { _controller: "AppBundle:Doctor/Home:index" }
+
+doctor_contact_register:
+    path: /register
+    defaults: { _controller: "AppBundle:Doctor/Registration:register" }
+
+doctor_login:
+    path: /login
+    defaults: {_controller: "AppBundle:Doctor/Security:login" }

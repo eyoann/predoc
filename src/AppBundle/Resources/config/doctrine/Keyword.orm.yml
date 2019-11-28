@@ -1,0 +1,25 @@
+AppBundle\Entity\Keyword:
+    type: entity
+    table: keyword
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 500
+    manyToMany:
+        questions:
+            targetEntity: Question
+            inversedBy: keywords
+            joinTable:
+                name: questions_keywords
+            joinColumns:
+                question_id:
+                    referencedColumnName: id
+            inverseJoinColumns:
+                keyword_id:
+                referencedColumnName: id

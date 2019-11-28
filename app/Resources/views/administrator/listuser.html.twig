@@ -1,0 +1,36 @@
+{% extends 'administrator/tempalte.html.twig' %}
+{% block contenu %}
+{% if contacts|length > 0 %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-condensed table-hover table-striped tablesorter">
+                <thead>
+                <tr>
+                    <th>Identifiant</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Role</th>
+                    <th>Email</th>
+                    <th>Rpps</th>
+                    <th>Action</th>
+
+                </tr>
+
+                </thead>
+                <tbody>
+                {% for contact in contacts %}
+                    <tr>
+                    <td>{{ contact.id }}</td>
+                    <td>{{ contact.lastname }}</td>
+                    <td>{{ contact.firstname }}</td>
+                    <td> {% for role in contact.user.roles %} {{ role }} {% endfor %}</td>
+                    <td>{{ contact.user.email }}</td>
+                    <td>{{ contact.rpps }}</td>
+                    <td><a class="btn btn-default btn-xs" href="{{ path('edit_user', {id : contact.id}) }}">Modifier</a></td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+    {% endblock %}

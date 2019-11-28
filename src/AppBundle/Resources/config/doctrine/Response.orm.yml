@@ -1,0 +1,33 @@
+AppBundle\Entity\Response:
+    type: entity
+    repositoryClass: AppBundle\Repository\ResponseRepository
+    table: response
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        text:
+            type: string
+            length: 500
+        image:
+            type: string
+            length: 500
+    manyToOne:
+        nextQuestion:
+            targetEntity: AppBundle\Entity\Question
+            joinColumn:
+                name: next_question
+                referencedColumnName: id
+        previousQuestion:
+            targetEntity: AppBundle\Entity\Question
+            inversedBy: responses
+            joinColumn:
+                name: previous_question
+                referencedColumnName: id
+    manyToMany:
+        participations:
+            targetEntity: Participation
+            mappedBy: responses

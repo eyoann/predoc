@@ -1,0 +1,71 @@
+parameters:
+    entity.questionnaire.class: AppBundle\Entity\Questionnaire
+    entity.response.class: AppBundle\Entity\Response
+    entity.question.class: AppBundle\Entity\Question
+    entity.contact.class: AppBundle\Entity\Contact
+    entity.participation.class: AppBundle\Entity\Participation
+    entity.user.class: AppBundle\Entity\User
+
+services:
+    manager.questionnaire:
+        class: Doctrine\ORM\EntityManager
+        factory:
+            - "@doctrine"
+            - getManagerForClass
+        arguments:
+            - "%entity.questionnaire.class%"
+    repository.questionnaire:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@manager.questionnaire", getRepository]
+        arguments:
+            - "%entity.questionnaire.class%"
+    manager.response:
+        class: Doctrine\ORM\EntityManager
+        factory:
+            - "@doctrine"
+            - getManagerForClass
+        arguments:
+            - "%entity.response.class%"
+    repository.response:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@manager.response", getRepository]
+        arguments:
+            - "%entity.response.class%"
+    manager.contact:
+        class: Doctrine\ORM\EntityManager
+        factory:
+            - "@doctrine"
+            - getManagerForClass
+        arguments:
+            - "%entity.contact.class%"
+    repository.contact:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@manager.contact", getRepository]
+        arguments:
+            - "%entity.contact.class%"
+    manager.question:
+        class: Doctrine\ORM\EntityManager
+        factory:
+            - "@doctrine"
+            - getManagerForClass
+        arguments:
+            - "%entity.question.class%"
+    repository.question:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@manager.question", getRepository]
+        arguments:
+            - "%entity.question.class%"
+    manager.participation:
+        class: Doctrine\ORM\EntityManager
+        factory:
+            - "@doctrine"
+            - getManagerForClass
+        arguments:
+            - "%entity.participation.class%"
+    manager.user:
+        class: Doctrine\ORM\EntityManager
+        factory:
+            - "@doctrine"
+            - getManagerForClass
+        arguments:
+            - "%entity.user.class%"

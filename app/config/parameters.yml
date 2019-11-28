@@ -1,0 +1,18 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: predoc
+    database_user: root
+    database_password: null
+    mailer_transport: gmail
+    mailer_user: predoc.contact@gmail.com
+    mailer_password: phym-2016-l3z1
+    secret: c402420729a813e707e97f99466056a61a68af87
+    administrator_host_pattern: predoc-administrator\.localhost
+    administrator_host: predoc-administrator.localhost
+    doctor_host_pattern: predoc-doctor\.localhost
+    doctor_host: predoc-doctor.localhost
+    patient_host_pattern: predoc\.localhost
+    patient_host: predoc.localhost
+    mailer_host: 127.0.0.1

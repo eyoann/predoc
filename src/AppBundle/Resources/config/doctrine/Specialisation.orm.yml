@@ -1,0 +1,26 @@
+AppBundle\Entity\Specialisation:
+    type:  entity
+    repositoryClass: AppBundle\Repository\SpecialisationRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 50
+    manyToMany:
+        contacts:
+            targetEntity: Contact
+            inversedBy: specialisations
+            joinTable:
+                name: contacts_specialisations
+            joinColumns:
+                contact_id:
+                    referencedColumnName: id
+            inverseJoinColumns:
+                specialisation_id:
+                referencedColumnName: id
+

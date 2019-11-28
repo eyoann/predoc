@@ -1,0 +1,47 @@
+{% extends 'doctor/app.html.twig' %}
+{% block body %}
+{% set cError = '' %}
+{% if error == 'Bad credentials.' %}
+    {% set cError = ' has-error' %}
+{% endif %}
+<div class="panel panel-default">
+    
+    <div class="panel-heading">
+        <p class="panel-title">
+            Connexion
+        </p>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" action="{{ path('fos_user_security_check') }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            {% if error %}
+                Erreur login
+            {% endif %}
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Email</label>
+                <div class="col-sm-9">
+                    <input class="form-control required-focus-only" type="email" id="username" name="_username" value="" maxlength="80" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Mot de passe</label>
+                <div class="col-sm-9">
+                    <input class="form-control required-focus-only" type="password" id="password" name="_password" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-7">
+                    {% set parameter = {} %}
+                    {% if error %}
+                        {% set parameter = {login: last_username} %}
+                    {% endif %}
+                    {#<a class="btn btn-link" href="{{ path('fos_user_resetting_request', parameter) }}"><small>Mot de passe oublié</small></a>#}
+                </div>
+                <div class="col-sm-5 text-right">
+                    <button class="btn btn-primary" type="submit">Se connecter</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

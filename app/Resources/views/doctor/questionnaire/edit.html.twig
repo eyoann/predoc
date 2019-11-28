@@ -1,0 +1,125 @@
+{% extends 'doctor/app.html.twig' %}
+
+{% block body %}
+	<br>
+	<br>
+	<br>
+	<br>
+	<form action="{{ path('save_edit_questionnaire', {id : questionnaire.id}) }}" method="post">
+		<div class="container">
+			{% if questionnaire.parent %}
+				<div class="panel panel-default">
+		  			<div class="panel-heading">Questionnaire parent : {{ questionnaire.parent.title }}</div>
+				</div>
+			{% endif %}
+			<div class="panel panel-default">
+		  		<div class="panel-heading">Titre de votre questionnaire</div>
+		  		<div class="panel-body">
+		  			<input class="form-control required-focus-only" type="text" name="questionnaire" value="{{ questionnaire.title }}">
+		  		</div>
+			</div>
+		</div>
+		{% if questions is defined %}
+			{% for key, question in questions %}
+				{% set index = loop.index0 %}
+				<div class="container">
+					<div class="panel panel-default">
+				  		<div class="panel-heading">{{ index }} - Votre question - {{ question.questionnaire.title }} <button type='button' onclick='up(this, {{question.id}},
+				  		{% if index > 0 %}
+				  			{{questions[index-1].id}}
+				  		{% else %}
+				  			{{question.id}}
+				  		{% endif %},
+				  		{% if index > 1 %}
+				  			{{questions[index-2].id}}
+				  		{% else %}
+				  			{{question.id}}
+				  		{% endif %})'>
+				  		<i class='ion-chevron-up'></i></button><button type='button' onclick='down
+				  			(this, {{question.id}},
+				  		{% if index > 0 %}
+				  			{{questions[index-1].id}}
+				  		{% else %}
+				  			{{question.id}}
+				  		{% endif %})'><i class='ion-chevron-down'></i></button></div>
+				  		<div class="panel-body">
+				  			<input class="form-control required-focus-only" type="text" name="question[{{ loop.index0 }}]" value="{{ questions[loop.index0].text }}">
+				  		</div>
+				  		<div class="panel-heading">Vos réponses</div>
+				  		{% for response in responses[key] %}
+							<div class="panel-body">
+				  				<input class="form-control required-focus-only" type="text" name="response[{{index}}][]" value="{{ response.text }}">
+				  			</div>
+				  		{% endfor %}
+				  		<div id="end">
+				  			<button class="btn btn-primary" onclick="addResponse(this)" type="button">Ajouter une réponse</button>
+				  		</div>
+					</div>
+				 </div>
+			 {% endfor %}
+		{% else %}
+			<div class="container">
+			<div class="panel panel-default">
+		  		<div class="panel-heading">Votre question</div>
+		  		<div class="panel-body">
+		  			<input class="form-control required-focus-only" type="text" name="question[]">
+		  		</div>
+				<div class="panel-heading">Vos réponses</div>
+				<div class="panel-body">
+		  			<input class="form-control required-focus-only" type="text" name="response[0][]">
+		  		</div>
+		  		<div class="panel-body">
+		  			<input class="form-control required-focus-only" type="text" name="response[0][]" >
+		  		</div>
+		  		<div id="end">
+		  			<button class="btn btn-primary" onclick="addResponse(this)" type="button">Ajouter une réponse</button>
+		  		</div>
+			</div>
+		 </div>
+		{% endif %}
+		 <div id="end-question">
+		 <button class="btn btn-primary" onclick="addQuestion(this)" type="button">Ajouter une question</button>
+		 <button class="btn btn-primary" name="add" value="add">Ajouter un sous questionnaire</button>
+		 <input class="btn btn-default" type="submit" value="Sauvegarder">
+		 </div>
+	</form>
+	<br>
+	{% if questionnaires|length > 0 %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-condensed table-hover table-striped tablesorter">
+                <thead>
+                <tr>
+                    <th>Identifiant</th>
+                    <th data-sorter="false">Sous questionnaire</th>
+                    <th>Dernière modification</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for questionnaire in questionnaires %}
+                    <tr>
+                    <td>{{ questionnaire.id }}</td>
+                    <td><a href="{{ path('edit_doctor_questionnaire', {id : questionnaire.id}) }}"> {{ questionnaire.title }}</td>
+                    <td>{{ questionnaire.updated|date }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block javascripts %}
+	<script>
+		var index = "{{questions|length - 1}}" ;
+		function addResponse(e) {
+			console.log($(e).parent().prev().clone());
+			$(e).parent().before($(e).parent().prev().clone());
+		}
+		function addQuestion(e) {
+			index++;
+			console.log(index);
+			$(e).parent().before(
+        	"<div class='container'><div class='panel panel-default'><div class='panel-heading'>Votre question</div><div class='panel-body'><input class='form-control required-focus-only' type='text' name='question[]'></div><div class='panel-heading'>Vos réponses</div><div class='panel-body'><input class='form-control required-focus-only' type='text' name='response["+index+"][]'></div><div class='panel-body'><input class='form-control required-focus-only' type='text' name='response["+index+"][]'></div><div id='end'><button class='btn btn-primary' onclick='addResponse(this)' type='button'>Ajouter une réponse</button></div></div></div>");
+		}
+	</script>
+
+{% endblock %}

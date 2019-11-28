@@ -1,0 +1,7 @@
+_patient_annotation:
+    resource: "@AppBundle/Controller/Patient"
+    type: annotation
+
+patient_homepage:
+    path: /
+    defaults: { _controller: "AppBundle:Patient/Home:index" }

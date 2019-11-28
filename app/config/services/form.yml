@@ -1,0 +1,39 @@
+parameters:
+    doctor_fos_user_registration.form.name: doctor_fos_user_registration
+
+services:
+    doctor_fos_user.registration.form.type:
+        class: AppBundle\Form\RegistrationFormType
+        tags:
+            - { name: "form.type", alias: "doctor_fos_user_registration" }
+
+
+    doctor_fos_user.registration.form:
+      class: Symfony\Component\Form\Form
+      factory: ["@form.factory", createNamed]
+      arguments: ["%doctor_fos_user_registration.form.name%", AppBundle\Form\RegistrationFormType]
+
+    doctor_fos_user.registration.form.handler:
+        class: AppBundle\Form\Handler\RegistrationFormHandler
+        scope: request
+        arguments:
+            - "@doctor_fos_user.registration.form"
+            - "@request_stack"
+            - "@fos_user.user_manager"
+            - "@manager.contact"
+            - "@fos_user.util.token_generator"
+            - "@mailer"
+            - "@templating"
+
+    form.type.contact:
+        class: AppBundle\Form\ContactType
+        tags:
+            - { name: form.type, alias: form_type_contact }
+    form.type.user:
+        class: AppBundle\Form\UserType
+        tags:
+            - { name: form.type, alias: form_type_user }
+    form.type.doctor:
+        class: AppBundle\Form\DoctorType
+        tags:
+            - { name: form.type, alias: form_type_doctor }

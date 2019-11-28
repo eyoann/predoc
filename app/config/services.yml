@@ -1,0 +1,24 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+
+imports:
+    - { resource: 'services/entity.yml' }
+    - { resource: 'services/form.yml' }
+
+
+parameters:
+#    parameter_name: value
+
+services:
+    doctor.user_provider.username_email:
+        class: AppBundle\Security\DoctorEmailUserProvider
+        public: false
+        arguments:
+            - '@fos_user.user_manager'
+
+    administrator.user_provider.username_email:
+        class: AppBundle\Security\AdministratorEmailUserProvider
+        public: false
+        arguments:
+            - '@fos_user.user_manager'
+    

@@ -1,0 +1,11 @@
+_admin_annotation:
+    resource: "@AppBundle/Controller/Administrator"
+    type: annotation
+
+admin_homepage:
+    path: /
+    defaults: { _controller: "AppBundle:Administrator/Home:index" }
+
+admin_login:
+    path: /login
+    defaults: {_controller: "AppBundle:Administrator/Security:login" }

@@ -1,0 +1,32 @@
+{% extends 'administrator/tempalte.html.twig' %}
+{% block enhead %}
+	<h2>Gestion des utilisateurs</h2>   
+    <h5>Ajouter un nouveau Utilisateur </h5>
+{% endblock %}
+
+{% block contenu %}
+				
+							<div class="col-md-6">
+									{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}	
+								<div class="form-group">
+										 <label>Username : </label>
+										{{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+								</div>
+								
+								<div class="form-group">
+										 <label>Mot de passe : </label>
+										{{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
+								</div>	
+								
+							
+								
+								<div class="form-group">
+										{{ form_widget(form.Enregistrer, {'attr': {'class': 'btn btn-primary'}}) }}
+								</div>
+								
+									{{ form_end(form) }}
+							</div>
+ {% endblock %}
+
+
+								
